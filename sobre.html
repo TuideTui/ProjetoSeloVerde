@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sobre - Selo Verde</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="shortcut icon" href="/img/SeloVerde2.png" type="image/x-icon">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Poppins', sans-serif; background: linear-gradient(to bottom, #e0f7fa, #f0f4f8); color: #333; line-height: 1.6; }
+    header { background: #fff; display: flex; justify-content: space-between; align-items: center; padding: 1rem 3rem; box-shadow: 0 5px 10px rgba(0,0,0,0.09); position: sticky; top: 0; z-index: 1000; }
+    header h1 { font-weight: 700; font-size: 1.8rem; color: #2e7d32; transition: transform 0.3s; }
+    header h1:hover { transform: scale(1.05); }
+    nav ul { display: flex; gap: 2rem; list-style: none; }
+    nav a { color: #2e7d32; text-decoration: none; font-weight: 600; transition: color 0.3s, transform 0.3s, text-shadow 0.3s ease; }
+    nav a:hover { color: #000; transform: scale(1.1); text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.13); }
+    .logo-container { display: flex; align-items: center; gap: 0.8rem; text-decoration: none; }
+    .logo-img { width: 50px; transition: transform 0.3s; }
+    .logo-img:hover { transform: rotate(10deg) scale(1.05); }
+    .hero { text-align: center; padding: 4rem 2rem; background: linear-gradient(to right, #4caf50, #66bb6a); color: #fff; border-radius: 0 0 8% 8% / 12%; animation: fadeIn 1.2s ease-in-out; }
+    .hero h2 { font-size: 3rem; margin-bottom: 1rem; }
+    .hero p { font-size: 1.2rem; margin-bottom: 2rem; }
+    .card { background: #ffffff72; padding: 4rem; border-radius: 16px; box-shadow: 0 4px 16px rgba(0,0,0,0.05); text-align: left; transition: transform 0.3s, box-shadow 0.3s; }
+    .about-section { padding: 4rem 2rem; max-width: 900px; margin: 0 auto; }
+    footer { text-align: center; padding: 2rem; background: #2e7d32; color: #fff; border-radius: 5% 5% 0 0 / 10%; }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="index.html" class="logo-container">
+      <img src="/img/SeloVerde2.png" alt="Logo Selo Verde" class="logo-img">
+      <h1>Selo Verde</h1>
+    </a>
+    <nav>
+      <ul>
+        <li><a href="index.html">Início</a></li>
+        <li><a href="empresas.html">Empresas</a></li>
+        <li><a href="comparacao.html">Comparação</a></li>
+        <li><a href="sobre.html">Sobre nós</a></li>
+        <li><a href="news.html">News</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h2>Sobre o Selo Verde</h2>
+    <p>Transparência e sustentabilidade ao alcance de todos.</p>
+  </section>
+
+  <main>
+    <section class="about-section">
+        <div class="card">
+        <h2 style="color: #2e7d32; font-size: 2rem; margin-bottom: 1rem;">Nossa Missão</h2>
+        <p style="margin-bottom: 1rem;">
+            O <strong>Selo Verde</strong> é uma plataforma interativa criada para tornar a sustentabilidade algo acessível e comparável entre empresas. Com dados abertos e visualmente claros, ajudamos você a enxergar o impacto real das marcas no meio ambiente.
+        </p>
+        <p style="margin-bottom: 1rem;">
+            Acreditamos que consumidores bem informados têm o poder de transformar o mercado. Por isso, tornamos possível comparar empresas com base em seus selos, políticas, processos produtivos e notas ambientais.
+        </p>
+        <p style="margin-bottom: 1rem;">
+            Nossa visão é um mercado onde a transparência ambiental seja um diferencial competitivo e não apenas um discurso de marketing.
+        </p>
+        <p style="margin-bottom: 1rem;">
+            Com isso, o Selo Verde apoia uma economia mais ética, sustentável e alinhada com os desafios do nosso tempo, como mudanças climáticas e responsabilidade corporativa.
+        </p>
+        <p>
+            Seja para escolher um produto, uma parceria ou apenas se informar: o Selo Verde está aqui para ajudar você a fazer escolhas que respeitam o planeta.
+        </p>
+        </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Selo Verde - Promovendo escolhas sustentáveis.</p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Selo Verde</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="shortcut icon" href="/img/SeloVerde2.png" type="image/x-icon">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Poppins', sans-serif; background: linear-gradient(to bottom, #e0f7fa, #f0f4f8); color: #333; line-height: 1.6; }
+    header { background: #fff; display: flex; justify-content: space-between; align-items: center; padding: 1rem 3rem; box-shadow: 0 5px 10px rgba(0,0,0,0.09); position: sticky; top: 0; z-index: 1000; }
+    header h1 { font-weight: 700; font-size: 1.8rem; color: #2e7d32; transition: transform 0.3s; }
+    header h1:hover { transform: scale(1.05); }
+    nav ul { display: flex; gap: 2rem; list-style: none; }
+    nav a { color: #2e7d32; text-decoration: none; font-weight: 600; transition: color 0.3s, transform 0.3s, text-shadow 0.3s ease; }  
+    nav a:hover { color: #000; transform: scale(1.1); text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.13); }
+    .logo-container { display: flex; align-items: center; gap: 0.8rem; text-decoration: none; }
+    .logo-img { width: 50px; transition: transform 0.3s; }
+    .logo-img:hover { transform: rotate(10deg) scale(1.05); }
+    .hero { text-align: center; padding: 4rem 2rem; background: linear-gradient(to right, #4caf50, #66bb6a); color: #fff; border-radius: 0 0 8% 8% / 12%; animation: fadeIn 1.2s ease-in-out; }
+    .hero h2 { font-size: 3rem; margin-bottom: 1rem; }
+    .hero p { font-size: 1.2rem; margin-bottom: 2rem; }
+    .hero button { padding: 0.75rem 2rem; background: #2e7d32; color: #fff; border: none; border-radius: 30px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 8px rgba(0,0,0,0.2); }
+    .hero button:hover { background: #1b5e20; transform: scale(1.1); }
+    .home-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; padding: 3rem; }
+    .card { background: #fff; padding: 2rem; border-radius: 16px; box-shadow: 0 4px 16px rgba(0,0,0,0.05); text-align: center; transition: transform 0.3s, box-shadow 0.3s; }
+    .card:hover { transform: translateY(-10px); box-shadow: 0 6px 20px rgba(0,0,0,0.1); }
+    .card img { width: 100%; border-radius: 16px; margin-top: 1rem; }
+    footer { text-align: center; padding: 2rem; background: #2e7d32; color: #fff; border-radius: 5% 5% 0 0 / 10%; }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="index.html" class="logo-container">
+      <img href="SeloVerde.html" src="/img/SeloVerde2.png" alt="Logo Selo Verde" class="logo-img" style="width:50px; height:auto; ">
+      <h1>Selo Verde</h1>
+    </a>
+    <nav>
+      <ul>
+        <li><a href="index.html">Início</a></li>
+        <li><a href="empresas.html">Empresas</a></li>
+        <li><a href="comparacao.html">Comparação</a></li>
+        <li><a href="sobre.html">Sobre nós</a></li>
+        <li><a href="news.html">News</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h2>Renove o Futuro com Escolhas Conscientes</h2>
+    <p>Descubra empresas sustentáveis e faça parte de um mundo mais verde.</p>
+    <a href="sobre.html">
+      <button>Saiba Mais</button>
+    </a>
+  </section>
+
+  <main>
+    <div class="home-content">
+      <div class="card">
+        <h3>🌿 Sobre o Selo Verde</h3>
+        <p>O Selo Verde promove práticas sustentáveis, ajudando você a escolher empresas aliadas ao ambiente.</p>
+        <img src="/img/SeloVerde2.png" alt="Selo Verde">
+      </div>
+      <div class="card">
+        <h3>🏢 Empresas Conscientes</h3>
+        <p>Conheça empresas que se destacam pela sustentabilidade e fazem a diferença.</p>
+        <img src="/img/EmpresaVerde.png" alt="Empresas Sustentáveis" class="selo-img">
+      </div>
+      <div class="card">
+        <h3>♻️ Como Contribuímos</h3>
+        <p>Informamos de forma clara para apoiar escolhas de consumo responsáveis e sustentáveis.</p>
+        <img src="/img/Consumo.png" alt="Consumo Sustentável">
+      </div>
+      <div class="card">
+        <h3>🌎 Sustentabilidade e Você</h3>
+        <p>Suas escolhas fazem a diferença. Faça parte da transformação verde!</p>
+        <img src="/img/Mulher-Planeta.png" alt="Mulher Sustentável">
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Selo Verde - Promovendo escolhas sustentáveis.</p>
+  </footer>
+
+  <script>
+    document.querySelector('a[href="#avaliacao"]').addEventListener('click', () => exibirSecao('avaliacao'));
+    document.querySelector('a[href="#comparacao"]').addEventListener('click', () => exibirSecao('comparacao'));
+    document.querySelector('a[href="#perfil"]').addEventListener('click', () => exibirSecao('perfil'));
+    document.querySelector('a[href="#comunidade"]').addEventListener('click', () => exibirSecao('comunidade'));
+
+    // Exibe a seção "home" ao carregar a página
+    document.addEventListener('DOMContentLoaded', () => {
+      exibirSecao('home');
+    });
+
+    // Scroll suave para links internos
+    document.querySelectorAll('nav a').forEach(link => {
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        const target = document.querySelector(link.getAttribute('href'));
+        target.scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+  </script>
+</body>
+</html>

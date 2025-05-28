@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Selo Verde</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="shortcut icon" href="/img/SeloVerde2.png" type="image/x-icon">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Poppins', sans-serif; background: linear-gradient(to bottom, #e0f7fa, #f0f4f8); color: #333; line-height: 1.6; }
+    header { background: #fff; display: flex; justify-content: space-between; align-items: center; padding: 1rem 3rem; box-shadow: 0 5px 10px rgba(0,0,0,0.09); position: sticky; top: 0; z-index: 1000; }
+    header h1 { font-weight: 700; font-size: 1.8rem; color: #2e7d32; transition: transform 0.3s; }
+    header h1:hover { transform: scale(1.05); }
+    nav ul { display: flex; gap: 2rem; list-style: none; }
+    nav a { color: #2e7d32; text-decoration: none; font-weight: 600; transition: color 0.3s, transform 0.3s, text-shadow 0.3s ease; }  
+    nav a:hover { color: #000; transform: scale(1.1); text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.13); }
+    .logo-container { display: flex; align-items: center; gap: 0.8rem; text-decoration: none; }
+    .logo-img { width: 50px; transition: transform 0.3s; }
+    .logo-img:hover { transform: rotate(10deg) scale(1.05); }
+    .hero { text-align: center; padding: 4rem 2rem; background: linear-gradient(to right, #4caf50, #66bb6a); color: #fff; border-radius: 0 0 8% 8% / 12%; animation: fadeIn 1.2s ease-in-out; }
+    .hero h2 { font-size: 3rem; margin-bottom: 1rem; }
+    .hero p { font-size: 1.2rem; margin-bottom: 2rem; }
+    .home-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; padding: 3rem; }
+    .card { background: #fff; padding: 2rem; border-radius: 16px; box-shadow: 0 4px 16px rgba(0,0,0,0.05); text-align: center; transition: transform 0.3s, box-shadow 0.3s; }
+    .card img { width: 100%; border-radius: 16px; margin-top: 1rem; }
+    .newsletter-section { padding: 4rem 2rem; }
+    footer { text-align: center; padding: 2rem; background: #2e7d32; color: #fff; border-radius: 5% 5% 0 0 / 10%; }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+    <header>
+        <a href="index.html" class="logo-container">
+        <img href="SeloVerde.html" src="/img/SeloVerde2.png" alt="Logo Selo Verde" class="logo-img" style="width:50px; height:auto;">
+        <h1>Selo Verde</h1>
+        </a>
+        <nav>
+        <ul>
+            <li><a href="index.html">Início</a></li>
+            <li><a href="empresas.html">Empresas</a></li>
+            <li><a href="comparacao.html">Comparação</a></li>
+            <li><a href="sobre.html">Sobre nós</a></li>
+            <li><a href="news.html">News</a></li>
+        </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h2>News</h2>
+        <p>Notícias de uma comunidade sustentável.</p>
+    </section>
+
+    <main>
+    <section class="newsletter-section">
+        <div class="card" style="max-width: 720px; margin: 0 auto; padding: 2rem; display: flex; flex-direction: column; align-items: center;">
+        <img src="/img/SeloVerde2.png" alt="Selo Verde Ícone" style="width: 70px; margin-bottom: 1rem;">
+        <h2 style="color: #2e7d32; font-size: 2rem; margin-bottom: 0.5rem;">🌱 Receba nossa Newsletter</h2>
+        <p style="font-size: 1.1rem; color: #555; text-align: center; margin-bottom: 2rem;">
+            Cadastre seu nome e e-mail para receber conteúdos sobre ESG, meio ambiente e práticas sustentáveis. Entre de forma gratuita na comunidade do Selo Verde pelo nosso grupo do Telegram. 🌍
+        </p>
+
+        <form id="newsletterForm" onsubmit="return validarFormulario()" style="display: flex; flex-direction: column; gap: 1rem; width: 100%;">
+            <div style="position: relative;">
+            <input type="text" id="nome" name="nome" placeholder="Seu nome completo" required style="padding: 1rem; border-radius: 10px; border: 2px solid #ccc; font-size: 1rem; width: 100%;">
+            <span id="nomeStatus" style="position: absolute; right: 1rem; top: 50%; transform: translateY(-50%); font-size: 1.2rem;"></span>
+            </div>
+
+            <div style="position: relative;">
+            <input type="email" id="email" name="email" placeholder="Seu e-mail" required style="padding: 1rem; border-radius: 10px; border: 2px solid #ccc; font-size: 1rem; width: 100%;">
+            <span id="emailStatus" style="position: absolute; right: 1rem; top: 50%; transform: translateY(-50%); font-size: 1.2rem;"></span>
+            </div>
+
+            <label style="font-size: 0.95rem; color: #444; text-align: left;">
+            <input type="checkbox" id="politica" required>
+            Eu concordo com a <a href="politica.html" target="_blank" style="color: #2e7d32; text-decoration: underline;">política de privacidade</a>.
+            </label>
+
+            <button id="enviarBtn" type="submit" style="padding: 1rem; background: #2e7d32; color: #fff; border: none; border-radius: 30px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease;">Quero Receber Notícias</button>
+
+            <div id="loading" style="display: none; margin-top: 1rem;">⏳ Enviando dados...</div>
+        </form>
+
+        <div id="popupSucesso" style="display: none; margin-top: 2rem; color: #2e7d32; font-weight: 600;">🎉 Inscrição realizada com sucesso!</div>
+
+        <div id="telegramLink" style="display: block; margin-top: 2rem; background: #fff; padding: 2rem; border-radius: 16px; box-shadow: 0 6px 20px rgba(0,0,0,0.1); text-align: center;">
+            <img src="https://cdn-icons-png.flaticon.com/512/2111/2111646.png" alt="Telegram" style="width: 60px; margin-bottom: 1rem;">
+            <h3 style="margin-bottom: 0.5rem;">Grupo Selo Verde</h3>
+            <p style="margin-bottom: 1rem;">Entre agora para receber notícias em primeira mão!</p>
+            <button onclick="copiarLink()" style="background: #2e7d32; color: white; padding: 0.8rem 1.5rem; border-radius: 30px; font-weight: 600; text-decoration: none; border: none; cursor: pointer;">Copiar Link do Grupo</button>
+            <p id="copiado" style="color: #2e7d32; margin-top: 1rem; display: none;">📋 Link copiado com sucesso!</p>
+        </div>
+        </div>
+    </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Selo Verde - Promovendo escolhas sustentáveis.</p>
+    </footer>
+
+    <script>
+    function validarFormulario() {
+        const nome = document.getElementById('nome');
+        const email = document.getElementById('email');
+        const politica = document.getElementById('politica');
+        const btn = document.getElementById('enviarBtn');
+        const loading = document.getElementById('loading');
+
+        let valid = true;
+
+        politica.setCustomValidity("");
+
+        if (!nome.checkValidity()) {
+            nome.reportValidity();
+            valid = false;
+        } else {
+            document.getElementById('nomeStatus').textContent = '✅';
+        }
+
+        if (!email.checkValidity()) {
+            email.reportValidity();
+            valid = false;
+        } else {
+            document.getElementById('emailStatus').textContent = '✅';
+        }
+
+        if (!politica.checked) {
+            politica.setCustomValidity("Você precisa aceitar a política de privacidade.");
+            politica.reportValidity();
+            valid = false;
+        }
+
+        if (!valid) return false;
+
+        btn.disabled = true;
+        loading.style.display = 'block';
+
+        setTimeout(() => {
+            loading.style.display = 'none';
+            btn.disabled = false;
+            document.getElementById('popupSucesso').style.display = 'block';
+            document.getElementById('newsletterForm').reset();
+            document.getElementById('nomeStatus').textContent = '';
+            document.getElementById('emailStatus').textContent = '';
+        }, 2000);
+
+        return false;
+    }
+
+    function copiarLink() {
+        const link = 'https://t.me/seu_grupo_telegram';
+        navigator.clipboard.writeText(link).then(() => {
+            document.getElementById('copiado').style.display = 'block';
+            setTimeout(() => {
+                document.getElementById('copiado').style.display = 'none';
+            }, 3000);
+        });
+    }
+    </script>
+</body>
+</html>
