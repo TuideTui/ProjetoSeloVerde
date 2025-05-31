@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Comparação de Empresas - Selo Verde</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Poppins', sans-serif; background: linear-gradient(to bottom, #ecfaf3, #0b8e0675); color: #333; line-height: 1.6; }
+    header { background: rgba(255, 255, 255, 0.9); display: flex; justify-content: space-between; align-items: center; padding: 1rem 3rem; box-shadow: 0 5px 15px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; backdrop-filter: blur(10px); }
+    header h1 { font-weight: 700; font-size: 1.8rem; color: #2e7d32; transition: transform 0.3s; }
+    header h1:hover { transform: scale(1.05); }
+    nav ul { display: flex; gap: 2rem; list-style: none; }
+    nav a { color: #2e7d32; text-decoration: none; font-weight: 600; transition: color 0.3s, transform 0.3s, text-shadow 0.3s ease; }
+    nav a:hover { color: #000; transform: scale(1.1); text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.13); }
+    .logo-container { display: flex; align-items: center; gap: 0.8rem; text-decoration: none; }
+    .logo-img { width: 50px; transition: transform 0.3s; }
+    .logo-img:hover { transform: rotate(10deg) scale(1.05); }
+    .hero {
+      text-align: center;
+      padding: 1rem 2rem 2.2rem; /* antes: 1rem 2rem 4rem */
+      background: linear-gradient(to right, #4caf50, #66bb6a);
+      color: #fff;
+      border-radius: 0 0 8% 8% / 50%;
+      animation: fadeDown 1.6s ease-in-out;
+    }
+
+    .hero p {
+      margin-top: 0.8rem;
+      animation: fadeDown 1.3s ease-in-out;
+    }
+
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .select-container {
+      margin: 2rem auto 1rem;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    /* Estilo atualizado para a tabela */
+    .comparison-table {
+      width: 90%;
+      margin: 2rem auto;
+      border-collapse: separate;
+      border-spacing: 0;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      background-color: #fff;
+    }
+
+    /* Células */
+    .comparison-table th,
+    .comparison-table td {
+      padding: 1rem;
+      text-align: center;
+      border-bottom: 1px solid #e0e0e0;
+      vertical-align: middle;
+    }
+
+    /* Cabeçalho */
+    .comparison-table th {
+      background-color: #f5f5f5;
+      color: #333;
+      font-weight: 600;
+      top: 70px;
+      z-index: 2;
+    }
+
+    /* Nome dos atributos */
+    .attribute-name {
+      text-align: left;
+      background-color: #e8f5e9;
+      color: #1b5e20;
+      font-weight: 600;
+      font-size: 1rem;
+      border-right: 1px solid #e0e0e0;
+    }
+
+    /* Destaques */
+    .highlight {
+      background-color: #c8e6c9;
+      font-weight: bold;
+      border-radius: 0px;
+      box-shadow: 0 0 4px rgba(0, 0, 0, 0.05);
+    }
+
+    /* Barra de progresso */
+    .progress-bar {
+      background-color: #f0f0f0;
+      border-radius: 30px;
+      height: 14px;
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 5px;
+    }
+
+    .progress-bar span {
+      display: block;
+      height: 100%;
+      background-color: #66bb6a;
+      transition: width 0.5s ease;
+    }
+
+    /* Logo e botão de remover */
+    .empresa-logo {
+      width: 40px;
+      height: auto;
+      object-fit: contain;
+      margin-right: 8px;
+      vertical-align: middle;
+      display: inline-block;
+    }
+
+    .remove-btn {
+      background: none;
+      border: none;
+      color: #888;
+      font-size: 1.2rem;
+      cursor: pointer;
+      margin-left: 6px;
+      transition: color 0.2s ease;
+    }
+
+    .remove-btn:hover {
+      color: #555;
+    }
+
+    .empresa-coluna {
+      opacity: 0;
+      transform: translateY(1.1px);
+      animation: fadeSlideIn 0.6s forwards;
+    }
+
+    @keyframes fadeSlideIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .imagem-banner-customizada {
+      width: 90%;
+      max-width: 1700px;
+      margin: 2rem auto 3rem;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    }
+
+    .imagem-banner-customizada img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 20px;
+    }
+
+    #busca-empresa {
+      padding: 0.7rem 1.2rem;
+      border-radius: 30px;
+      border: 2px solid #cecece;
+      font-weight: bold;
+      background: #fff;
+      min-width: 200px;
+      outline: none;
+      transition: border 0.3s ease;
+    }
+
+    #busca-empresa:focus {
+      border-color: #c4c4c4;
+      box-shadow: 0 0 0 1.4px rgba(145, 145, 145, 0.2);
+    }
+
+    #sugestoes li:hover {
+      background-color: #f0f0f0;
+    }
+
+    .search-wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 600px;
+    }
+
+    .search-icon-img {
+      position: absolute;
+      top: 50%;
+      left: 1rem;
+      transform: translateY(-50%);
+      width: 20px;
+      height: 20px;
+      pointer-events: none;
+      opacity: 0.5;
+    }
+
+    #busca-empresa {
+      width: 100%;
+      padding: 0.9rem 1.2rem 0.9rem 2.8rem;
+      border-radius: 30px;
+      border: 2px solid #cecece;
+      font-weight: 600;
+      background: #fff;
+      outline: none;
+      transition: border 0.3s ease;
+      font-size: 1rem;
+    }
+
+    .card-info {
+      flex: 1 1 280px;
+      background: #e5e5e52a;
+      padding: 2rem 1.5rem;
+      border-radius: 20px;
+      box-shadow: 6px 8px 8px rgba(0,0,0,0.07);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      text-align: left;
+      max-width: 340px;
+      animation: slideFade 0.6s ease forwards;
+    }
+
+    .card-info h3 {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #606060;
+      margin-bottom: 0.6rem;
+    }
+
+    .card-info p {
+      color: #555;
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    .fade-in {
+      animation: fadeIn 0.4s ease-in;
+    }
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(10px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+
+    @keyframes slideFade {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .card-info {
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .comparison-table th, .comparison-table td {
+        font-size: 0.9rem;
+        padding: 0.5rem;
+      }
+    }
+
+    .selo-ganhador {
+      display: inline-block;
+      background-color: #ffea00;
+      color: #333;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 10px;
+      margin-left: 8px;
+      animation: piscar 2s infinite ease-in-out;
+      box-shadow: 0 4.5px 4.5px rgba(0, 0, 0, 0.1);
+    }
+
+    .hero-title {
+      text-align: center;
+      margin: -0.08rem 0rem 0rem;
+      font-size: 2.8rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: -1rem;
+      animation: fadeDown 1.2s ease-in-out;
+    }
+
+    @keyframes floatIn {
+      0% {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInSlow {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a href="index.html" class="logo-container">
+      <img href="SeloVerde.html" src="/img/SeloVerde2.png" alt="Logo Selo Verde" class="logo-img" style="width:50px; height:auto; ">
+      <h1>Selo Verde</h1>
+    </a>
+
+    <nav>
+      <ul>
+        <li><a href="index.html">Início</a></li>
+        <li><a href="empresas.html">Empresas</a></li>
+        <li><a href="comparacao.html">Comparação</a></li>
+        <li><a href="sobre.html">Sobre nós</a></li>
+        <li><a href="news.html">News</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h2 class="hero-title titulo-animado">Tabela Verde.</h2>
+    <p>A Nota Verde é usada para definir o ganhador das comparações de sustentabilidade.</p>
+  </section>  
+
+  <div class="select-container">
+    <div class="search-wrapper">
+      <img src="/img/LupaPesquisa.png" alt="Ícone de Lupa" class="search-icon-img">
+      <input type="text" id="busca-empresa" placeholder="Pesquisar empresa..." autocomplete="off" />
+      <ul id="sugestoes"
+          style="position: absolute; top: 100%; left: 0; background: white; list-style: none; 
+                 margin-top: 5px; border: 1px solid #ccc; width: 100%; 
+                 border-radius: 10px; max-height: 180px; overflow-y: auto; 
+                 display: none; z-index: 999;">
+      </ul>
+    </div>    
+  </div>
+
+  <div id="limpar-container" style="width: 90%; margin: 0 auto; display: flex; justify-content: flex-end; margin-top: 1rem; display: none;">
+    <button id="limpar-tabela" style="background-color: #e53935; color: white; border: none; padding: 0.6rem 1.2rem; border-radius: 40px; font-weight: 600; cursor: pointer; box-shadow: 0 4px 8px rgba(0,0,0,0.1); transition: background 0.3s;">
+      Limpar Tabela
+    </button>
+  </div>  
+
+  <table class="comparison-table" id="comparacao"></table>
+
+  <div class="imagem-banner-customizada">
+    <img src="/img/Tabela Verde.png" alt="Banner Sustentável">
+  </div>
+
+  <section style="max-width: 1200px; margin: 4rem auto; padding: 3rem 2rem; background: linear-gradient(145deg, #f9f9f986, #fcffcb60); border-radius: 28px; box-shadow: 0 12px 36px rgba(0,0,0,0.06); text-align: center; overflow: hidden; position: relative;">
+    <h2 style="font-size: 2.5rem; font-weight: 700; color: #555555; margin-bottom: 1.2rem; letter-spacing: -0.5px;">Por que comparar?</h2>
+    <p style="font-size: 1.15rem; color: #444; max-width: 850px; margin: 0 auto 2.5rem; line-height: 1.8;">
+      Motivos para fazer comparações de sustentabilidade das maiores empresas do Brasil:
+    </p>
+  
+    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem; margin-top: 1.5rem;">
+      <div class="card-info">
+        <h3>1. Incentivar práticas sustentáveis</h3>
+        <p>Comparar sustentabilidade estimula a concorrência positiva e motiva empresas a adotarem ações mais verdes.</p>
+      </div>
+      <div class="card-info">
+        <h3>2. Informar decisões conscientes</h3>
+        <p>Ajuda consumidores e investidores a escolherem empresas alinhadas com seus valores ambientais.</p>
+      </div>
+      <div class="card-info">
+        <h3>3. Promover transparência corporativa</h3>
+        <p>A comparação incentiva empresas a divulgarem suas ações sustentáveis de forma clara e responsável.</p>
+      </div>
+    </div>
+  </section> 
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <script>
+    const SUPABASE_URL = "https://aczfdalfyyognsrbqkqy.supabase.co";
+    const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFjemZkYWxmeXlvZ25zcmJxa3F5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDg3MTI4MzcsImV4cCI6MjA2NDI4ODgzN30.0O6eadNKZ7m37IRW7dO-9_9rXPVZWZBhJdfyiGcLZCI";
+    const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+    let empresasDB = [];
+    let comparadas = [];
+
+    async function carregarEmpresasDoBanco() {
+      const { data, error } = await supabase
+        .from('selo-verde')
+        .select('*')
+        .order('ranking', { ascending: true });
+
+      if (error) {
+        console.error("Erro ao carregar empresas:", error);
+        return;
+      }
+
+      empresasDB = data;
+      renderComparacao();
+    }
+
+    function removerEmpresa(index) {
+      comparadas = comparadas.filter(i => i !== index);
+      renderComparacao();
+    }
+
+    function criarBarra(valor, max = 10) {
+      const percentual = (valor / max) * 100;
+      return `
+        <div class="progress-bar">
+          <span style="width:${percentual}%"></span>
+        </div>
+        <small>${valor}</small>
+      `;
+    }
+
+    function renderComparacao() {
+      const table = document.getElementById("comparacao");
+      table.innerHTML = "";
+
+      let destaqueColuna = -1;
+      if (comparadas.length > 1) {
+        const notas = comparadas.map(i => empresasDB[i].notaVerde);
+        destaqueColuna = notas.indexOf(Math.max(...notas));
+      }
+
+      const headers = Array(4).fill(null).map((_, colIndex) => {
+        const i = comparadas[colIndex];
+        if (i !== undefined) {
+          const emp = empresasDB[i];
+          const destaqueClasse = (comparadas.length > 1 && colIndex === destaqueColuna) ? "highlight-coluna" : "";
+          const selo = (comparadas.length > 1 && colIndex === destaqueColuna)
+            ? `<span class="selo-ganhador">Ganhador 🏆</span>` : "";
+
+          return `<th class="empresa-coluna ${destaqueClasse}">
+            <img src="${emp.logo}" alt="${emp.nome}" class="empresa-logo">
+            ${emp.nome} ${selo}
+            <button class="remove-btn" onclick="removerEmpresa(${i})">&times;</button>
+          </th>`;
+        } else {
+          return `<th style="color: #b9b9b9;">Slot vazio</th>`;
+        }
+      });
+
+      table.innerHTML += `
+        <tr>
+          <th class="attribute-name">Atributo</th>
+          ${headers.join('')}
+        </tr>
+      `;
+
+      const atributos = [
+        { nome: "Nota Verde", chave: "notaVerde", numerico: true },
+        { nome: "Ranking", chave: "ranking", numerico: true, invertido: true },
+        { nome: "Segmento", chave: "segmento" },
+        { nome: "Selos", chave: "selo" },
+        { nome: "Política", chave: "politica" },
+        { nome: "Processos", chave: "processos" },
+        { nome: "Outras Iniciativas", chave: "outras" }
+      ];
+
+      atributos.forEach(attr => {
+        let destaque = -1;
+        if (attr.numerico) {
+          const valores = comparadas.map(i => Number(empresasDB[i][attr.chave]));
+          destaque = attr.invertido
+            ? valores.indexOf(Math.min(...valores))
+            : valores.indexOf(Math.max(...valores));
+        }
+
+        const linha = Array(4).fill(null).map((_, colIndex) => {
+          const i = comparadas[colIndex];
+          if (i !== undefined) {
+            const valor = empresasDB[i][attr.chave];
+            const content = attr.numerico && attr.nome === "Nota Verde" ? criarBarra(valor) : valor;
+            const destaqueClasse = (comparadas.length > 1 && colIndex === destaqueColuna)
+              ? "highlight highlight-coluna"
+              : (comparadas.length > 1 && colIndex === destaque && attr.numerico)
+                ? "highlight"
+                : "";
+            return `<td class="${destaqueClasse}">${content}</td>`;
+          } else {
+            return `<td style="color:#bbb;">—</td>`;
+          }
+        });
+
+        table.innerHTML += `
+          <tr>
+            <td class="attribute-name">${attr.nome}</td>
+            ${linha.join('')}
+          </tr>
+        `;
+      });
+
+      const limparContainer = document.getElementById("limpar-container");
+      limparContainer.style.display = comparadas.length === 4 ? "flex" : "none";
+    }
+
+    document.getElementById("limpar-tabela").addEventListener("click", () => {
+      comparadas = [];
+      renderComparacao();
+    });
+
+    const inputBusca = document.getElementById("busca-empresa");
+    const sugestoesLista = document.getElementById("sugestoes");
+
+    inputBusca.addEventListener("input", function () {
+      const termo = this.value.toLowerCase();
+      sugestoesLista.innerHTML = "";
+
+      if (termo.length < 1) {
+        sugestoesLista.style.display = "none";
+        return;
+      }
+
+      const encontrados = empresasDB
+        .map((empresa, index) => ({ ...empresa, index }))
+        .filter(emp => emp.nome.toLowerCase().includes(termo) && !comparadas.includes(emp.index));
+
+      if (encontrados.length === 0) {
+        sugestoesLista.style.display = "none";
+        return;
+      }
+
+      encontrados.forEach(emp => {
+        const li = document.createElement("li");
+        const destaque = emp.nome.replace(
+          new RegExp(`(${termo})`, "i"),
+          "<strong>$1</strong>"
+        );
+        li.innerHTML = destaque;
+        li.style.padding = "10px";
+        li.style.cursor = "pointer";
+        li.addEventListener("click", () => {
+          if (comparadas.length < 4) {
+            comparadas.push(emp.index);
+            renderComparacao();
+          }
+          inputBusca.value = "";
+          sugestoesLista.style.display = "none";
+        });
+        sugestoesLista.appendChild(li);
+      });
+
+      sugestoesLista.style.display = "block";
+    });
+
+    document.addEventListener("click", function (event) {
+      if (!inputBusca.contains(event.target) && !sugestoesLista.contains(event.target)) {
+        sugestoesLista.style.display = "none";
+      }
+    });
+
+    document.addEventListener("DOMContentLoaded", async () => {
+      await carregarEmpresasDoBanco();
+    });
+  </script> 
+</body>
+</html>
